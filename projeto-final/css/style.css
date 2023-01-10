@@ -1,0 +1,10 @@
+/*assim que fazemos import de css*/
+
+@import 'geral.css';
+@import 'modal.css';
+@import 'tooltip.css';
+@import 'dropdown-menu.css';
+@import 'menu-mobile.css';
+@import 'numeros.css';
+@import 'horarioFuncionamento.css';
+

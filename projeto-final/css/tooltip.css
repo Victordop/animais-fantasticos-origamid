@@ -1,0 +1,17 @@
+.tooltip{
+position: absolute;
+top: 0;
+left: 0;
+font-family: 'IBM Plex Mono', monospace;
+font-size: 0.85rem;
+background: rgba(0, 0, 0, 0.6);
+box-shadow: 0 0 0 2px #FB5, 0 0 0 6px rgba(0, 0, 0, 0.6); /*borda dupla*/
+padding: 0.5rem;
+color: white;
+z-index: 500; /*para usar z-index temos que setar uma position que não seja static*/
+/*z-index permite a gente tirar da camada inicial, empilha conforme os elementos aparecem no html*/
+/*quando maior, mais perto da tela */
+font-weight: bold;
+border-radius: 2px;
+max-width: 150px;
+}
