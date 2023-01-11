@@ -1,6 +1,9 @@
-export default function initScrollSuave() {
-  const linksInternos = document.querySelectorAll('[data-menu="menu"] a[href^="#"');
-  function scrollSuave(event) {
+export default class ScrollSuave {
+  constructor(links, options) {
+    this.linksInternos = document.querySelectorAll(links);
+  }
+
+  scrollToSection(event) { // este é um método dentro de uma classe
     event.preventDefault();
     const href = this.getAttribute('href'); // faz referencia ao elemento que está sofrendo ação
     const section = document.querySelector(href);
@@ -10,9 +13,16 @@ export default function initScrollSuave() {
       block: 'start', // alinha o bloco no começo, ou seja, no topo da pagina
     });
   }
-  if (linksInternos.length) {
-    linksInternos.forEach((link) => {
-      link.addEventListener('click', scrollSuave);
-    });
+
+  addLinkEvent() {
+    if (this.linksInternos.length) {
+      this.linksInternos.forEach((link) => { // temos que usar this pois está dentro do objeto
+        link.addEventListener('click', this.scrollToSection);
+      });
+    }
+  }
+
+  init() {
+    this.addLinkEvent();
   }
 }

@@ -37,5 +37,3 @@ fetchAnimais();
 
 // const diferenca = _.difference(['banana', 'maçã'], ['banana', 'uva']);
 // console.log(diferenca);
-
-console.log('oi')
