@@ -1,6 +1,7 @@
 // import $ from 'jquery'; // como estou usando node n preciso colocar js
 // import _ from 'lodash';
-import initScrollSuave from './module/scroll-suave.js';
+
+import ScrollSuave from './module/scroll-suave.js';
 import initScroll from './module/scroll-animacao.js';
 import accordionFaq from './module/accordion-faq-animacao.js';
 import tabNav from './module/clique-imagem-section-animacao.js';
@@ -21,7 +22,9 @@ import fetchAnimais from './module/fetch-animais.js';
 // o mouse por cima
 // aria-label dá na mesma para o leitor de tela mas quando mouse passa em cima a caixinha n aparece
 
-initScrollSuave();
+const scrollSuave = new ScrollSuave('[data-menu="menu"] a[href^="#"');
+scrollSuave.init();
+
 initScroll();
 accordionFaq();
 tabNav();
@@ -37,5 +40,3 @@ fetchAnimais();
 
 // const diferenca = _.difference(['banana', 'maçã'], ['banana', 'uva']);
 // console.log(diferenca);
-
-console.log('oi')
