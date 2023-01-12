@@ -15,7 +15,7 @@ export default class ScrollSuave {
   scrollToSection(event) { // este é um método dentro de uma classe e uma função de callback
   // this não é o objeto e sim o elemento que recebe o eventListener
     event.preventDefault();
-    const href = this.getAttribute('href');
+    const href = event.currentTarget.getAttribute('href');
     const section = document.querySelector(href);
 
     section.scrollIntoView(this.options);
@@ -31,7 +31,10 @@ export default class ScrollSuave {
   }
 
   init() {
-    this.addLinkEvent();
+    if (this.linksInternos.length) {
+      this.addLinkEvent();
+    }
+    return this; // importante para eu poder linkar outras funções quando chamo a função init, caso contrario tenho undefined
   }
 }
 
