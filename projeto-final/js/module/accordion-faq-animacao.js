@@ -1,4 +1,4 @@
-export default function accordionFaq() { //colocar o código dentro de uma função tira ele do escopo global
+export default function accordionFaq() { // colocar o código dentro de uma função tira ele do escopo global
   const listaAcordion = document.querySelectorAll('.faq-accordion dt');
   const classeAtivo = 'ativo'; // como repetimos muito, bom colocar em uma var, fica mais fácil mudar no futuro
 
