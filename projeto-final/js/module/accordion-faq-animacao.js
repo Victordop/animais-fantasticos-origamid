@@ -1,18 +1,25 @@
-export default function accordionFaq() { //colocar o código dentro de uma função tira ele do escopo global
-  const listaAcordion = document.querySelectorAll('.faq-accordion dt');
-  const classeAtivo = 'ativo'; // como repetimos muito, bom colocar em uma var, fica mais fácil mudar no futuro
-
-  function accordionEvent() {
-    this.classList.toggle(classeAtivo);
-    this.nextElementSibling.classList.toggle(classeAtivo);
+export default class AccordionFaq {
+  constructor(list) {
+    this.listaAcordion = document.querySelectorAll(list);
+    this.classeAtivo = 'ativo'; // como repetimos muito, bom colocar em uma var, fica mais fácil mudar no futuro
   }
 
-  if (listaAcordion.length) { // se true significa que a lista de accordion existe.
-    listaAcordion[0].classList.add(classeAtivo); // mostra para o usuário que ali tem texto
-    listaAcordion[0].nextElementSibling.classList.add(classeAtivo);
-
-    listaAcordion.forEach((dt) => {
-      dt.addEventListener('click', accordionEvent);
+  addEventListener() {
+    this.listaAcordion.forEach((dt) => {
+      dt.addEventListener('click', () => this.accordionToggle(dt)); // o this volta a ser a ojeto da classe ao invés do item
     });
+  }
+
+  accordionToggle(dt) {
+    dt.classList.toggle(this.classeAtivo);
+    dt.nextElementSibling.classList.toggle(this.classeAtivo);
+  }
+
+  init() {
+    if (this.listaAcordion.length) { //  se true significa que a lista de accordion existe.
+      this.accordionToggle(this.listaAcordion[0]);
+      this.addEventListener();
+    }
+    return this;
   }
 }
