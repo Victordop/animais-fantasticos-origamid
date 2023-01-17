@@ -7,9 +7,7 @@ export default class TabNav {
 
   addTabEventListener() {
     this.lista.forEach((imagem, index) => {
-      imagem.addEventListener('click', () => {
-        this.activeTab(index);
-      });
+      imagem.addEventListener('click', () => this.activeTab(index));
     });
   }
 
