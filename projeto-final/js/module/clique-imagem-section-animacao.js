@@ -1,22 +1,31 @@
-export default function tabNav() {
-  const lista = document.querySelectorAll('.js-tabmenu li');
-  const conteudo = document.querySelectorAll('.js-tabcontent section');
-
-  function activeTab(index) {
-    conteudo.forEach((section) => {
-      section.classList.remove('ativo');
-    });
-    const datasetAnimacao = conteudo[index].dataset.anime; // dataset é uma propriedade, um objeto do construtor de html -> permite adicionarmos
-    conteudo[index].classList.add('ativo', datasetAnimacao); // um atributo na tag e converte-lo hem classe
+export default class TabNav {
+  constructor(menu, conteudo) {
+    this.lista = document.querySelectorAll(menu);
+    this.conteudo = document.querySelectorAll(conteudo);
+    this.classeAtivo = 'ativo';
   }
 
-  if (lista.length && conteudo.length) {
-    conteudo[0].classList.add('ativo');
-
-    lista.forEach((imagem, index) => {
+  addTabEventListener() {
+    this.lista.forEach((imagem, index) => {
       imagem.addEventListener('click', () => {
-        activeTab(index);
+        this.activeTab(index);
       });
     });
+  }
+
+  activeTab(index) {
+    this.conteudo.forEach((section) => {
+      section.classList.remove(this.classeAtivo);
+    });
+    const datasetAnimacao = this.conteudo[index].dataset.anime; // dataset é uma propriedade, um objeto do construtor de html -> permite adicionarmos
+    this.conteudo[index].classList.add(this.classeAtivo, datasetAnimacao); // um atributo na tag e converte-lo hem classe
+  }
+
+  initTabNav() {
+    if (this.lista.length && this.conteudo.length) {
+      this.activeTab(0); // this.conteudo[0].classList.add(this.classeAtivo);
+      this.addTabEventListener();
+    }
+    return this;
   }
 }
