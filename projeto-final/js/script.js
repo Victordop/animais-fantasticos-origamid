@@ -20,6 +20,7 @@ tabNav.initTabNav();
 
 const modal = new AbreModalLogin('[data-modal=abrir]', '[data-modal=container]', '[data-modal=fechar]');
 modal.init();
+
 // modal é aquela telinha que aparece no site quando apertamos pra fazer o login, p ex
 // ou uma propaganda que aparece do nada
 

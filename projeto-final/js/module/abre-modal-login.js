@@ -4,19 +4,24 @@ export default class AbreModalLogin {
     this.container = document.querySelector(container);
     this.botaoFechar = document.querySelector(botaoFechar);
     // bind das funções de callback
-    this.toggleModal = this.toggleModal.bind(this);
+    this.eventToggleModal = this.eventToggleModal.bind(this);
     this.cliqueForaModal = this.cliqueForaModal.bind(this);
+  }
+
+  toggleModal() {
+    this.container.classList.toggle('ativo');
+  }
+
+  // adiciona o evento de toggle ao modal
+  eventToggleModal(event) {
+    event.preventDefault();
+    this.toggleModal();
   }
 
   cliqueForaModal(event) {
     if (event.target === this.container) { // ou seja, a parte cinza
       this.toggleModal();
     }
-  }
-
-  toggleModal(event) {
-    event.preventDefault();
-    this.container.classList.toggle('ativo');
   }
 
   init() {
@@ -27,10 +32,8 @@ export default class AbreModalLogin {
   }
 
   addEventModal() {
-    this.botaoLogin.addEventListener('click', this.toggleModal);
+    this.botaoLogin.addEventListener('click', this.eventToggleModal);
     this.container.addEventListener('click', this.cliqueForaModal);
-    this.botaoFechar.addEventListener('click', this.toggleModal);
+    this.botaoFechar.addEventListener('click', this.eventToggleModal);
   }
 }
-
-// tá com bug no event
