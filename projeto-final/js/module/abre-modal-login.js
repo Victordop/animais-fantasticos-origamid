@@ -1,29 +1,39 @@
-export default function abreModalLogin() {
-  // aqui selecionei o container e os botões relacionados a ele
-  const botaoLogin = document.querySelector('[data-modal=abrir]');
-  const container = document.querySelector('[data-modal=container]');
-  const botaoFechar = document.querySelector('[data-modal=fechar]');
+export default class AbreModalLogin {
+  constructor(botaoLogin, container, botaoFechar) {
+    this.botaoLogin = document.querySelector(botaoLogin);
+    this.container = document.querySelector(container);
+    this.botaoFechar = document.querySelector(botaoFechar);
+    // bind das funções de callback
+    this.eventToggleModal = this.eventToggleModal.bind(this);
+    this.cliqueForaModal = this.cliqueForaModal.bind(this);
+  }
 
-  // essa parte do código vai adicionar a classe ativo ao modal quando clicamos no botao login
-  // e excluir a classe ativo quando clicamos no x do modal
+  toggleModal() {
+    this.container.classList.toggle('ativo');
+  }
 
-  if (botaoLogin && container && botaoFechar) { // vai criar e executar as funções apenas se os elementos selecionados existirem
-    function toggleModal(event) {
-      event.preventDefault(); // previne ir pra outra página, comportamento padrão
-      container.classList.toggle('ativo');
+  // adiciona o evento de toggle ao modal
+  eventToggleModal(event) {
+    event.preventDefault();
+    this.toggleModal();
+  }
+
+  cliqueForaModal(event) {
+    if (event.target === this.container) { // ou seja, a parte cinza
+      this.toggleModal();
     }
+  }
 
-    function cliqueForaModal(event) { // aplica a função de fechar modal ; coloquei o event pra n dar erro
-      if (event.target === this) {
-        toggleModal(event);
-      }
-
-      // console.log(event.target) //é o container todo
-      // console.log(this) //também é o container todo => this é o elemento pai
+  init() {
+    if (this.botaoLogin && this.container && this.botaoFechar) {
+      this.addEventModal();
     }
+    return this;
+  }
 
-    botaoLogin.addEventListener('click', toggleModal);
-    container.addEventListener('click', cliqueForaModal); // ao clicar no container, que é o que envolve tudo
-    botaoFechar.addEventListener('click', toggleModal);
+  addEventModal() {
+    this.botaoLogin.addEventListener('click', this.eventToggleModal);
+    this.container.addEventListener('click', this.cliqueForaModal);
+    this.botaoFechar.addEventListener('click', this.eventToggleModal);
   }
 }
