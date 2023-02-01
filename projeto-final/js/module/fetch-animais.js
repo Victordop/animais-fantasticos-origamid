@@ -1,4 +1,4 @@
-import animaNumeros from './anima-numeros.js'; // problema: a animação dos números estava acontecendo antes do fetch
+import AnimaNumeros from './anima-numeros.js'; // problema: a animação dos números estava acontecendo antes do fetch
 // solução importar o module para cá ao invés de importar pro script
 
 export default function fetchAnimais() {
@@ -23,7 +23,8 @@ export default function fetchAnimais() {
     animaisJSON.forEach((animal) => {
       const divAnimal = createAnimal(animal); // é o retorno da função createAnimal
       secaoNumeroAnimais.appendChild(divAnimal);
-      animaNumeros(); // acontece depois que rolou o fetch
+      const animaNumeros = new AnimaNumeros('[data-numero]','.grid-section.numeros' ,'anima'); // acontece depois que rolou o fetch
+      animaNumeros.init();
     });
   }
 
@@ -31,4 +32,3 @@ export default function fetchAnimais() {
 }
 
 // vai fazer fetch podemos usar then ou async/await
- 

@@ -1,8 +1,12 @@
-export default function animaNumeros() {
-  const numeros = document.querySelectorAll('[data-numero]');
+export default class AnimaNumeros {
+  constructor(numeros, observerTarget , observerClass) { //geralmente o que vai aqui são variaveis ou propriedades que contém string
+    this.numeros = document.querySelectorAll(numeros);
+    this.observerClass = observerClass;
+    this.observerTarget = document.querySelector(observerTarget);;
+  }
 
-  function initAnimaNumeros() {
-    numeros.forEach((elementoNumero) => {
+  initAnimaNumeros() {
+    this.numeros.forEach((elementoNumero) => {
       const valor = +elementoNumero.innerText;
       let start = 0;
       const incremento = valor / 100; /* para contagem chegar mais rápido, porém gera um incremento quebrado, da número errado */
@@ -22,20 +26,22 @@ export default function animaNumeros() {
 
   let observer;
 
-  function handleMutation(mutation) { // função de callback ; mutation é tipo um event do observer
+  handleMutation(mutation) { // função de callback ; mutation é tipo um event do observer
     // console.log(mutation);  //array like com informações como target, o tipo de mutação monitorada etc
     // console.log(mutation[0].target) //é um array like, tem só um item no caso
-    if (mutation[0].target.classList.contains('anima')) {
+    if (mutation[0].target.classList.contains(this.observerClass)) {
       observer.disconnect(); // quando ocorre a mutação ela para de ser observada com esse método disconnect
-      initAnimaNumeros();
+      this.initAnimaNumeros();
     }
   }
 
-  observer = new MutationObserver(handleMutation); // é um objeto que recebe uma função de callback
+  observer = new MutationObserver(this.handleMutation); // é um objeto que recebe uma função de callback
   // que é ativada na mudança
 
-  const observerTarget = document.querySelector('.grid-section.numeros');
-  observer.observe(observerTarget, { attributes: true }); // método do objeto que diz qual target deve ser
+
+  observer.observe(this.observerTarget, {
+    attributes: true
+  }); // método do objeto que diz qual target deve ser
   // .observe(target,o que vai ser observado no target, no caso acima a mudança de atributos)
 }
 
@@ -47,5 +53,3 @@ export default function animaNumeros() {
 // nosso código de animar o scroll estava sempre adicionando ou removendo classe com scroll
 // causa a mudança (mutação) e ativa o método, pra consertar  => remover apenas se a sessão
 // tiver a classe ativo. (script scroll-animaçao)
-
-
