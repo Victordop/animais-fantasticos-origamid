@@ -4,13 +4,13 @@
 import ScrollSuave from './module/scroll-suave.js';
 import initScroll from './module/scroll-animacao.js';
 import AccordionFaq from './module/accordion-faq-animacao.js';
-import initToolTip from './module/tooltip.js';
 import dropDownMenu from './module/dropdown-menu.js';
 import menuMobile from './module/menu-mobile.js';
 import initHorarioFuncionamento from './module/objeto-date.js';
 import fetchAnimais from './module/fetch-animais.js';
 import TabNav from './module/clique-imagem-section-animacao.js';
 import AbreModalLogin from './module/abre-modal-login.js';
+import ToolTip from './module/tooltip.js';
 
 const accordion = new AccordionFaq('.faq-accordion dt');
 accordion.init();
@@ -20,6 +20,9 @@ tabNav.initTabNav();
 
 const modal = new AbreModalLogin('[data-modal=abrir]', '[data-modal=container]', '[data-modal=fechar]');
 modal.init();
+
+const tooltip = new ToolTip('[data-tooltip]');
+tooltip.init();
 
 // modal é aquela telinha que aparece no site quando apertamos pra fazer o login, p ex
 // ou uma propaganda que aparece do nada
@@ -35,7 +38,6 @@ const scrollSuave = new ScrollSuave('[data-menu="menu"] a[href^="#"');
 scrollSuave.init();
 
 initScroll();
-initToolTip();
 dropDownMenu();
 menuMobile();
 initHorarioFuncionamento();
