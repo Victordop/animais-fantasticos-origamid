@@ -23,7 +23,7 @@ export default function fetchAnimais() {
     animaisJSON.forEach((animal) => {
       const divAnimal = createAnimal(animal); // é o retorno da função createAnimal
       secaoNumeroAnimais.appendChild(divAnimal);
-      const animaNumeros = new AnimaNumeros('[data-numero]','.grid-section.numeros' ,'anima'); // acontece depois que rolou o fetch
+      const animaNumeros = new AnimaNumeros('[data-numero]', '.grid-section.numeros', 'anima'); // acontece depois que rolou o fetch
       animaNumeros.init();
     });
   }
