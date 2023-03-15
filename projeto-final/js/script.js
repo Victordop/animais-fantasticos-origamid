@@ -41,7 +41,7 @@ initScroll();
 dropDownMenu();
 menuMobile();
 initHorarioFuncionamento();
-fetchAnimais();
+fetchAnimais('./numeroAnimaisApi.json', '.numeros-grid');
 
 // usando npm e webpack podemos importar scripts externos com facilidade
 // $('nav').hide();
