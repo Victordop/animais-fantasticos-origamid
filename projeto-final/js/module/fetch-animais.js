@@ -1,5 +1,5 @@
 import AnimaNumeros from './anima-numeros.js'; // problema: a animação dos números estava acontecendo antes do fetch
-// solução importar o module para cá ao invés de importar pro script
+// solução importar o module para cá ao invés de importar para o  script
 
 export default function fetchAnimais(url, target) {
   async function requisitaAnimais() {
@@ -9,13 +9,9 @@ export default function fetchAnimais(url, target) {
     const secaoNumeroAnimais = document.querySelector(target);
 
     function createAnimal(animal) { // estou recriando a parte do html pelo script
-      // console.log(animal)
-
       const div = document.createElement('div');
       div.classList.add('numero-animal');
-
       div.innerHTML = `<h3>${animal.especie}</h3><span data-numero>${animal.quantidade}</span>`;
-
       return div;
     }
 
@@ -30,4 +26,4 @@ export default function fetchAnimais(url, target) {
   requisitaAnimais(url);
 }
 
-// vai fazer fetch podemos usar then ou async/await
+// vai fazer fetch podemos usar then ou async/await (forma mais simples de escrever e ler promisses)
