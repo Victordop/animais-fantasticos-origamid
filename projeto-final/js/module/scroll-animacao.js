@@ -1,5 +1,4 @@
-export default function initScroll() { 
-
+export default function initScroll() {
   const sections = document.querySelectorAll('[data-scroll="scroll"]');
   // sections[0].classList.add('anima'); //para aparecer quando o usuario entra no site ou usar metodo de chamar a função la embaixo
   const metadeWindow = window.innerHeight * 0.5; // faz conta pra que o elemento anime quando estiver mais ou menos no meio da tela e n apenas quando o elemento bate no topo

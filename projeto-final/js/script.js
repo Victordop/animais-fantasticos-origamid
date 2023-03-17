@@ -11,6 +11,7 @@ import fetchAnimais from './module/fetch-animais.js';
 import TabNav from './module/clique-imagem-section-animacao.js';
 import AbreModalLogin from './module/abre-modal-login.js';
 import ToolTip from './module/tooltip.js';
+import fetchBtc from './module/fetch-bitcoin.js';
 
 const accordion = new AccordionFaq('.faq-accordion dt');
 accordion.init();
@@ -42,6 +43,7 @@ dropDownMenu();
 menuMobile();
 initHorarioFuncionamento();
 fetchAnimais('./numeroAnimaisApi.json', '.numeros-grid');
+// fetchBtc('https://blockchain.info/ticker');
 
 // usando npm e webpack podemos importar scripts externos com facilidade
 // $('nav').hide();
