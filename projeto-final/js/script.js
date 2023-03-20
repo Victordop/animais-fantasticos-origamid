@@ -2,7 +2,7 @@
 // import _ from 'lodash';
 
 import ScrollSuave from './module/scroll-suave.js';
-import initScroll from './module/scroll-animacao.js';
+import ScrollAnima from './module/scroll-anima.js';
 import AccordionFaq from './module/accordion-faq-animacao.js';
 import dropDownMenu from './module/dropdown-menu.js';
 import menuMobile from './module/menu-mobile.js';
@@ -11,7 +11,7 @@ import fetchAnimais from './module/fetch-animais.js';
 import TabNav from './module/clique-imagem-section-animacao.js';
 import AbreModalLogin from './module/abre-modal-login.js';
 import ToolTip from './module/tooltip.js';
-import fetchBtc from './module/fetch-bitcoin.js';
+// import fetchBtc from './module/fetch-bitcoin.js';
 
 const accordion = new AccordionFaq('.faq-accordion dt');
 accordion.init();
@@ -38,7 +38,10 @@ tooltip.init();
 const scrollSuave = new ScrollSuave('[data-menu="menu"] a[href^="#"');
 scrollSuave.init();
 
-initScroll();
+const scrollAnima = new ScrollAnima('[data-scroll="scroll"]');
+scrollAnima.init();
+// scrollAnima.stop();
+
 dropDownMenu();
 menuMobile();
 initHorarioFuncionamento();
