@@ -40,6 +40,7 @@ scrollSuave.init();
 
 const scrollAnima = new ScrollAnima('[data-scroll="scroll"]');
 scrollAnima.init();
+// scrollAnima.stop();
 
 dropDownMenu();
 menuMobile();
