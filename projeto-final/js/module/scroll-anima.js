@@ -1,8 +1,11 @@
+import debounce from './debounce.js';
+
 export default class ScrollAnima {
   constructor(section) {
     this.sections = document.querySelectorAll(section);
     this.metadeWindow = window.innerHeight * 0.5; // faz conta pra que o elemento anime quando estiver mais ou menos no meio da tela e n apenas quando o elemento bate no topo
     this.checkDistance = this.checkDistance.bind(this); // fiz o bind, pois esta é uma função de callback dentro de uma classe, exige isso
+    this.eventoFiltrado = debounce(this.checkDistance, 50); // poderia ter aplicado o debounce no binde acima como alternativa
   }
 
   getDistance() {
@@ -24,15 +27,12 @@ export default class ScrollAnima {
         item.element.classList.remove('anima'); // assim n fica adicionado ou removendo de todos dependente de estarem visiveis ou n
       }
     });
+  // console.log('scroll'); => usado para ver se o debouncing funcionou
   }
-
-  // getBOundinClientRect().top tem um problema, sempre pega o valor referente a onde está a barra de scroll
-  // offsetTop -> sempre dá a distância fixa entre a seção, no caso, e o topo da página
-  // desestruturando uma nodeList ela vira um array
 
   init() {
     if (this.sections.length) {
-      window.addEventListener('scroll', this.checkDistance);
+      window.addEventListener('scroll', this.eventoFiltrado);
       this.getDistance();
       this.checkDistance(); // ativa a função uma vez assim que o site iniciou
     }
@@ -44,3 +44,7 @@ export default class ScrollAnima {
   //   window.removeEventListener('scroll', this.checkDistance);
   // }
 }
+
+// getBOundinClientRect().top tem um problema, sempre pega o valor referente a onde está a barra de scroll
+// offsetTop -> sempre dá a distância fixa entre a seção, no caso, e o topo da página
+// desestruturando uma nodeList ela vira um array
