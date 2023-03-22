@@ -13,3 +13,4 @@ export default function debounce(callback, delay) {
 
 // Debounce serve para o evento não ficar sendo ativado alucinadamente, ele filtra o número
 // de vezes que o evento é ativado
+// utiliza-lo para eventos de scroll e resize (muda tamanho da tela)
