@@ -30,21 +30,34 @@ menuDropDown.addEventListener('mouseleave',fechaMenuDropDown);
 */
 
 // solução professor
-export default function dropDownMenu() {
-  const dropDownMenus = document.querySelectorAll('[data-dropdown] ');
+export default class DropDownMenu {
+  constructor(menu, events) {
+    this.dropDownMenus = document.querySelectorAll(menu);
+    this.activeDropDownMenu = this.activeDropDownMenu.bind(this);
+    this.activeClass = 'menu-ativado';
+    if (events === 'undefined') this.events = ['touchstart', 'click'];
+    else this.events = events;
+  }
 
-  dropDownMenus.forEach((menu) => {
-  
-    function handleClick(event) { // função de callback
-      event.preventDefault();
-      this.classList.add('menu-ativado');
-      outsideClick(this, ['touchstart', 'click'], () => {
-        this.classList.remove('menu-ativado');
-      });
-    }
-
-    ['touchstart', 'click'].forEach((userEvent) => { // maneira mais sucinta de escrever
-      menu.addEventListener(userEvent, handleClick);
+  activeDropDownMenu(event) { // função de callback
+    event.preventDefault();
+    const element = event.CurrentTarget;
+    element.classList.add(this.activeClass);
+    outsideClick(element, this.events, () => {
+      this.classList.remove(this.activeClass);
     });
-  });
+  }
+
+  addDropDownMenuEvent() {
+    this.events.forEach((userEvent) => { // maneira mais sucinta de escrever
+      this.events.addEventListener(userEvent, this.activeDropDownMenu);
+    });
+  }
+
+  init() {
+    if (this.dropDownMenus.lenght) {
+      this.addDropDownMenuEvent();
+    }
+    return this;
+  }
 }

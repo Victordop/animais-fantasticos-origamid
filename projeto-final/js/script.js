@@ -4,13 +4,13 @@
 import ScrollSuave from './module/scroll-suave.js';
 import ScrollAnima from './module/scroll-anima.js';
 import AccordionFaq from './module/accordion-faq-animacao.js';
-import dropDownMenu from './module/dropdown-menu.js';
 import menuMobile from './module/menu-mobile.js';
 import initHorarioFuncionamento from './module/objeto-date.js';
 import fetchAnimais from './module/fetch-animais.js';
 import TabNav from './module/clique-imagem-section-animacao.js';
 import AbreModalLogin from './module/abre-modal-login.js';
 import ToolTip from './module/tooltip.js';
+import DropDownMenu from './module/dropdown-menu.js';
 // import fetchBtc from './module/fetch-bitcoin.js';
 
 const accordion = new AccordionFaq('.faq-accordion dt');
@@ -42,7 +42,9 @@ const scrollAnima = new ScrollAnima('[data-scroll="scroll"]');
 scrollAnima.init();
 // scrollAnima.stop();
 
-dropDownMenu();
+const dropMenu = new DropDownMenu('[data-dropdown]');
+dropMenu.init();
+
 menuMobile();
 initHorarioFuncionamento();
 fetchAnimais('./numeroAnimaisApi.json', '.numeros-grid');
