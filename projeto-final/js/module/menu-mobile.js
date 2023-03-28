@@ -5,25 +5,40 @@
 
 import outsideClick from './outsideClick.js';
 
-export default function menuMobile() {
-  const botaoMenu = document.querySelector('[data-menu=button]');
-  const menuSandwich = document.querySelector('[data-menu=list]');
-  const eventos = ['touchstart', 'click'];
+export default class MenuMobile {
+  constructor(botao, menu, eventos) {
+    this.botaoMenu = document.querySelector(botao);
+    this.menuSandwich = document.querySelector(menu);
+    this.classeAtivar = 'ativar';
 
-  function ativaMenuMobile() {
-    botaoMenu.classList.add('ativar');
-    menuSandwich.classList.add('ativar');
+    this.ativaMenuMobile = this.ativaMenuMobile.bind(this);
 
-  
-    outsideClick(menuSandwich, eventos, () => {
-      botaoMenu.classList.remove('ativar');
-      menuSandwich.classList.remove('ativar');
+    if (eventos === undefined) this.eventos = ['touchstart', 'click'];
+    else this.eventos = eventos;
+
+    // this.init();  posso dar o init aqui no construtor, daí n preciso iniciar no script
+  }
+
+  ativaMenuMobile() {
+    this.botaoMenu.classList.add(this.classeAtivar);
+    this.menuSandwich.classList.add(this.classeAtivar);
+
+    outsideClick(this.menuSandwich, this.eventos, () => {
+      this.botaoMenu.classList.remove(this.classeAtivar);
+      this.menuSandwich.classList.remove(this.classeAtivar);
     });
+  }
+
+  addEvento() {
+    this.eventos.forEach((evento) => this.botaoMenu.addEventListener(evento, this.ativaMenuMobile));
+  }
+
+  init() {
+    if (this.botaoMenu && this.menuSandwich) { // verifica se eu selecionei o elemento corretamente senão dá erro
+      this.addEvento();
+    }
+    return this;
   }
   // problemas : a função de callback tá sendo ativada quando clico
   // ela é ativada quando clicamos fora porque o botão não está na li
-
-  if (botaoMenu) {  // verifica se eu selecionei o elemento corretamente senão dá erro
-    eventos.forEach((evento) => botaoMenu.addEventListener(evento, ativaMenuMobile));
-  }
 }
