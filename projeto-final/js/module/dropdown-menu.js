@@ -35,7 +35,7 @@ export default class DropDownMenu {
     this.dropDownMenus = document.querySelectorAll(menu);
     this.activeDropDownMenu = this.activeDropDownMenu.bind(this);
     this.activeClass = 'menu-ativado';
-    if (events === 'undefined') this.events = ['touchstart', 'click'];
+    if (events === undefined) this.events = ['touchstart', 'click'];
     else this.events = events;
   }
 
@@ -44,7 +44,7 @@ export default class DropDownMenu {
     const element = event.CurrentTarget;
     element.classList.add(this.activeClass);
     outsideClick(element, this.events, () => {
-      this.classList.remove(this.activeClass);
+      element.classList.remove(this.activeClass);
     });
   }
 
