@@ -4,13 +4,13 @@
 import ScrollSuave from './module/scroll-suave.js';
 import ScrollAnima from './module/scroll-anima.js';
 import AccordionFaq from './module/accordion-faq-animacao.js';
-import initHorarioFuncionamento from './module/objeto-date.js';
 import fetchAnimais from './module/fetch-animais.js';
 import TabNav from './module/clique-imagem-section-animacao.js';
 import AbreModalLogin from './module/abre-modal-login.js';
 import ToolTip from './module/tooltip.js';
 import DropDownMenu from './module/dropdown-menu.js';
 import MenuMobile from './module/menu-mobile.js';
+import Funcionamento from './module/objeto-date.js';
 // import fetchBtc from './module/fetch-bitcoin.js';
 
 const accordion = new AccordionFaq('.faq-accordion dt');
@@ -48,7 +48,9 @@ dropMenu.init();
 const menuMobile = new MenuMobile('[data-menu=button]', '[data-menu=list]');
 menuMobile.init();
 
-initHorarioFuncionamento();
+const funcionamento = new Funcionamento('[data-semana]');
+funcionamento.init();
+
 fetchAnimais('./numeroAnimaisApi.json', '.numeros-grid');
 // fetchBtc('https://blockchain.info/ticker');
 

@@ -41,29 +41,38 @@ console.log(diferencaDias);
 }
 */
 
-export default function initHorarioFuncionamento() {
-  const funcionamento = document.querySelector('[data-semana]');
-  // console.log(funcionamento.dataset.semana)
-  // const diasFuncionmaneto = funcionamento.dataset.semana; //para converter string em array =>split
-  // const diasFuncionmaneto = funcionamento.dataset.semana.split(','); para converter um array de números em string em um array de numero numero, aplicar map com Number
-  const diasFuncionmaneto = funcionamento.dataset.semana.split(',').map(Number); 
-  const horariosFuncionamento = funcionamento.dataset.horario.split(',').map(Number);
-  // console.log(diasFuncionmaneto, horariosFuncionamento);
+export default class Funcionamento {
+  constructor(horarioFuncionamento) {
+    this.funcionamento = document.querySelector(horarioFuncionamento);
+    // console.log(funcionamento.dataset.semana)
+    // const diasFuncionmaneto = funcionamento.dataset.semana; //para converter string em array =>split
+    // const diasFuncionmaneto = funcionamento.dataset.semana.split(','); para converter um array de números em string em um array de numero numero, aplicar map com Number
+    this.diasFuncionmaneto = this.funcionamento.dataset.semana.split(',').map(Number);
+    this.horariosFuncionamento = this.funcionamento.dataset.horario.split(',').map(Number);
+    // console.log(diasFuncionmaneto, horariosFuncionamento);
 
-  const agora = new Date();
-  const horaAgora = agora.getHours();
-  const diaSemanaAgora = agora.getDay();
-  // console.log(horaAgora,diaSemanaAgora);
+    this.agora = new Date();
+    this.horaAgora = this.agora.getHours();
+    this.diaSemanaAgora = this.agora.getDay();
+    // console.log(horaAgora,diaSemanaAgora);
 
-  // comparando o dia de agora com os dias de funcionamento
+    // comparando o dia de agora com os dias de funcionamento
 
-  // console.log([1,2,3,4,5].indexOf(6)); //quando não tem o número no array o index é -1
+    // console.log([1,2,3,4,5].indexOf(6)); //quando não tem o número no array o index é -1
 
-  const diaEstaFuncionando = diasFuncionmaneto.indexOf(diaSemanaAgora) !== -1; // true
+    this.diaEstaFuncionando = this.diasFuncionmaneto.indexOf(this.diaSemanaAgora) !== -1; // true
 
-  const horaEmpresaEstaAberta = horaAgora >= horariosFuncionamento[0] && horaAgora < horariosFuncionamento[1];
+    this.horaEmpresaEstaAberta = this.horaAgora >= this.horariosFuncionamento[0] && this.horaAgora < this.horariosFuncionamento[1];
+  }
 
-  if (diaEstaFuncionando && horaEmpresaEstaAberta) {
-    funcionamento.classList.add('aberto');
+  addClasseAberto() {
+    this.funcionamento.classList.add('aberto');
+  }
+
+  init() {
+    if (this.diaEstaFuncionando && this.horaEmpresaEstaAberta) {
+      this.addClasseAberto();
+    }
+    return this;
   }
 }
