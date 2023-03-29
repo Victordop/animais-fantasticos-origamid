@@ -42,35 +42,45 @@ console.log(diferencaDias);
 */
 
 export default class Funcionamento {
-  constructor(horarioFuncionamento) {
+  constructor(horarioFuncionamento, classAberto) {
     this.funcionamento = document.querySelector(horarioFuncionamento);
+    this.ClassAberto = classAberto;
     // console.log(funcionamento.dataset.semana)
     // const diasFuncionmaneto = funcionamento.dataset.semana; //para converter string em array =>split
     // const diasFuncionmaneto = funcionamento.dataset.semana.split(','); para converter um array de números em string em um array de numero numero, aplicar map com Number
-    this.diasFuncionmaneto = this.funcionamento.dataset.semana.split(',').map(Number);
-    this.horariosFuncionamento = this.funcionamento.dataset.horario.split(',').map(Number);
     // console.log(diasFuncionmaneto, horariosFuncionamento);
 
+    // comparando o dia de agora com os dias de funcionamento
+  }
+
+  dadosFuncionamento() {
+    this.diasFuncionmaneto = this.funcionamento.dataset.semana.split(',').map(Number);
+    this.horariosFuncionamento = this.funcionamento.dataset.horario.split(',').map(Number);
+  }
+
+  dadosAgora() {
     this.agora = new Date();
-    this.horaAgora = this.agora.getHours();
+    this.horaAgora = this.agora.getUTCHours() - 3; // hora padronizada para o mundo, brasilia, sp é esse -3
     this.diaSemanaAgora = this.agora.getDay();
     // console.log(horaAgora,diaSemanaAgora);
+  }
 
-    // comparando o dia de agora com os dias de funcionamento
-
-    // console.log([1,2,3,4,5].indexOf(6)); //quando não tem o número no array o index é -1
-
+  estaFuncionando() {
     this.diaEstaFuncionando = this.diasFuncionmaneto.indexOf(this.diaSemanaAgora) !== -1; // true
-
+    // console.log([1,2,3,4,5].indexOf(6)); //quando não tem o número no array o index é -1
     this.horaEmpresaEstaAberta = this.horaAgora >= this.horariosFuncionamento[0] && this.horaAgora < this.horariosFuncionamento[1];
+    return this.diaEstaFuncionando && this.horaEmpresaEstaAberta;
   }
 
   addClasseAberto() {
-    this.funcionamento.classList.add('aberto');
+    if (this.estaFuncionando()) this.funcionamento.classList.add(this.ClassAberto);
   }
 
   init() {
-    if (this.diaEstaFuncionando && this.horaEmpresaEstaAberta) {
+    if (this.funcionamento) {
+      // é necessário ativar as funções p termos os dados contidos nelas
+      this.dadosFuncionamento();
+      this.dadosAgora();
       this.addClasseAberto();
     }
     return this;
