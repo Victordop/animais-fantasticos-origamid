@@ -10,7 +10,6 @@ export default function outsideClick(element, events, callback) { // necessário
       });
       callback(); // ativa a função que foi passada como callback
     }
-
   }
 
   if (!element.hasAttribute(dataAtribute)) {
