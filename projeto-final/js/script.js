@@ -11,6 +11,7 @@ import ToolTip from './module/tooltip.js';
 import DropDownMenu from './module/dropdown-menu.js';
 import MenuMobile from './module/menu-mobile.js';
 import Funcionamento from './module/objeto-date.js';
+import SlideNav from './module/slides.js';
 // import fetchBtc from './module/fetch-bitcoin.js';
 
 const accordion = new AccordionFaq('.faq-accordion dt');
@@ -59,3 +60,8 @@ fetchAnimais('./numeroAnimaisApi.json', '.numeros-grid');
 
 // const diferenca = _.difference(['banana', 'maçã'], ['banana', 'uva']);
 // console.log(diferenca);
+
+const slides = new SlideNav('.wrapper', '.slide');
+slides.init();
+slides.changeSlide(0);
+slides.addControl('.custom-control');
