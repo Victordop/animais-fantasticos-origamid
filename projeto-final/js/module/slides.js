@@ -110,102 +110,97 @@ export class Slides {
   }
 
   addEvent() {
-        this.wrapper.addEventListener('mousedown', this.onStart); // mousedown é quando o usuário pressiona o botão do mous
-        this.wrapper.addEventListener('touchstart', this.onStart); // touch p/ dar responsividade, utilizado no mobile
-        this.wrapper.addEventListener('mouseup', this.onEnd);
-        this.wrapper.addEventListener('touchend', this.onEnd);
+    this.wrapper.addEventListener('mousedown', this.onStart); // mousedown é quando o usuário pressiona o botão do mous
+    this.wrapper.addEventListener('touchstart', this.onStart); // touch p/ dar responsividade, utilizado no mobile
+    this.wrapper.addEventListener('mouseup', this.onEnd);
+    this.wrapper.addEventListener('touchend', this.onEnd);
+  }
+
+  activePrevSlide() {
+    if (this.index.prev !== undefined) {
+      this.changeSlide(this.index.prev);
     }
+  }
 
-    activePrevSlide() {
-        if (this.index.prev !== undefined) {
-            this.changeSlide(this.index.prev);
-        }
+  activeNextSlide() {
+    if (this.index.next !== undefined) {
+      this.changeSlide(this.index.next);
     }
+  }
 
-    activeNextSlide() {
-        if (this.index.next !== undefined) {
-            this.changeSlide(this.index.next);
-        }
-    }
+  transition(active) {
+    this.slide.style.transition = active ? 'transform .3s' : '';
+  }
 
-    transition(active) {
-        this.slide.style.transition = active ? 'transform .3s' : '';
-    }
+  changeActiveClass() {
+    this.slidesArray.forEach((item) => item.slide.classList.remove(this.classActive));
+    this.slidesArray[this.index.active].slide.classList.add(this.classActive);
+  }
 
-    changeActiveClass() {
-        this.slidesArray.forEach(item => item.slide.classList.remove(this.classActive));
-        this.slidesArray[this.index.active].slide.classList.add(this.classActive);
+  onResize() {
+    setTimeout(() => { // espera carregar para dar o resize, ficam as imagens alinhadas
+      this.slideConfig();
+      this.changeSlide(this.index.active);
+    }, 1000);
+    // console.log('ativou resize');
+  }
 
-    }
+  addEventOnResize() {
+    window.addEventListener('resize', this.onResize);
+  }
 
-    onResize() {
-        setTimeout(() => { // espera carregar para dar o resize, ficam as imagens alinhadas
-            this.slideConfig();
-            this.changeSlide(this.index.active);
-        }, 1000);
-        // console.log('ativou resize');
-    }
-
-    addEventOnResize() {
-        window.addEventListener('resize', this.onResize);
-    }
-
-    init() {
-        this.binding();
-        this.transition(true);
-        this.addEvent();
-        this.slideConfig();
-        this.addEventOnResize();
-        return this;
-    }
-
-
-};
+  init() {
+    this.binding();
+    this.transition(true);
+    this.addEvent();
+    this.slideConfig();
+    this.addEventOnResize();
+    return this;
+  }
+}
 
 export default class SlideNav extends Slides { // quando extendemos classes, o construtor é o mesmo
-    constructor(wrapper, slide) {
-        super(wrapper, slide); // tem que usar o super pois é um construtor de classe estendida
-        this.controlBinding();
-        this.addActiveClass = this.addActiveClass.bind(this);
+  constructor(wrapper, slide) {
+    super(wrapper, slide); // tem que usar o super pois é um construtor de classe estendida
+    this.controlBinding();
+    this.addActiveClass = this.addActiveClass.bind(this);
+  }
 
-    }
-    addArrow(prev, next) {
-        this.prevBtn = document.querySelector(prev);
-        this.nextBtn = document.querySelector(next);
-        this.addEventArrow();
-    }
+  addArrow(prev, next) {
+    this.prevBtn = document.querySelector(prev);
+    this.nextBtn = document.querySelector(next);
+    this.addEventArrow();
+  }
 
-    addEventArrow() {
-        this.prevBtn.addEventListener('click', this.activePrevSlide);
-        this.nextBtn.addEventListener('click', this.activeNextSlide);
-    }
+  addEventArrow() {
+    this.prevBtn.addEventListener('click', this.activePrevSlide);
+    this.nextBtn.addEventListener('click', this.activeNextSlide);
+  }
 
-    createControl() {
-        const controle = document.createElement('ul');
-        controle.dataset.control = 'slide'; // podemos estilizar usando esta marcação
-        this.slidesArray.forEach((item, index) => {
-            controle.innerHTML += `<li><a href="#slide${index+1}">${index+1}</a></li>`
-        })
-        this.wrapper.appendChild(controle);
-        return controle;
-    }
+  createControl() {
+    const controle = document.createElement('ul');
+    controle.dataset.control = 'slide'; // podemos estilizar usando esta marcação
+    this.slidesArray.forEach((item, index) => {
+      controle.innerHTML += `<li><a href="#slide${index + 1}">${index + 1}</a></li>`;
+    });
+    this.wrapper.appendChild(controle);
+    return controle;
+  }
 
-    addControl(customControl) {
-        this.control = document.querySelector(customControl) || this.createControl();
-        this.controlArray = [...this.control.children]; // desestruturei e tenho um array com cada li
-        this.controlArray.forEach(this.eventControl); // como o callback do foreach e da função são o mesmo, n preciso passar
-        this.addActiveClass();
-    }
+  addControl(customControl) {
+    this.control = document.querySelector(customControl) || this.createControl();
+    this.controlArray = [...this.control.children]; // desestruturei e tenho um array com cada li
+    this.controlArray.forEach(this.eventControl); // como o callback do foreach e da função são o mesmo, n preciso passar
+    this.addActiveClass();
+  }
 
-
-    eventControl(item, index) {
-        item.addEventListener('click', (event) => {
-            event.preventDefault();
-            this.changeSlide(index);
-
-        })
-        this.wrapper.addEventListener('changeEvent', this.addActiveClass); // toda vez que muda o slide, muda a bolinha 
-    }
+  eventControl(item, index) {
+    item.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.changeSlide(index);
+    });
+    this.wrapper.addEventListener('changeEvent', this.addActiveClass); // toda vez que muda o slide, muda a bolinha
+  }
 
   controlBinding() {
     this.eventControl = this.eventControl.bind(this); // pois estava fazendo referencia a cada elemento do array
