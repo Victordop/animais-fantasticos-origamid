@@ -19,7 +19,8 @@ export default class MenuMobile {
     // this.init();  posso dar o init aqui no construtor, daí n preciso iniciar no script
   }
 
-  ativaMenuMobile() {
+  ativaMenuMobile(event) {
+    event.preventDefault();
     this.botaoMenu.classList.add(this.classeAtivar);
     this.menuSandwich.classList.add(this.classeAtivar);
 

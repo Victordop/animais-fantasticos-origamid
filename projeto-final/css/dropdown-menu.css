@@ -57,3 +57,13 @@
     border-right: 10px solid transparent;
     border-bottom: 10px solid #E54;
 }
+
+/*dropdown menu ativado quando mobile*/
+@media(max-width:700px){
+   
+    [data-dropdown] .dropdown-menu
+     {
+        display: block;
+        animation: animacaoMenuDropDown .5s forwards;
+    }
+}
