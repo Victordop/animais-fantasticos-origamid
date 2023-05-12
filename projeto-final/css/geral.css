@@ -262,12 +262,19 @@ display: none;
 }
 
 .faq-accordion dt::after{
-content: '🡣';
+content: '';
 margin-left: 10px;
+background: url(../img/arrow-red.svg) no-repeat center center;
+width: 8px;
+height: 10px;
+display: inline-block;
+transform: rotate(90deg);
+transition: .3s;
 }
 
 .faq-accordion dt.ativo::after{
-  content: '🡡';
+  content: '';
+  transform: rotate(-90deg);
 }
 
 .js .faq-accordion dd{ /*caso o js não esteja habilitado, não esconde o texto*/
@@ -301,3 +308,12 @@ transition: .3s;
 opacity:1;
 transform: translate3d(0,0,0);
   } 
+
+
+.black-arrow{
+  background: url(../img/arrow-black.svg) no-repeat center center;
+  display: inline-block;
+  width: 8px;
+  height: 10px;
+
+}

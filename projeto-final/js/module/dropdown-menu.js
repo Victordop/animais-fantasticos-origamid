@@ -40,7 +40,6 @@ export default class DropDownMenu {
   }
 
   activeDropDownMenu(event) { // função de callback
-    event.preventDefault();
     const element = event.CurrentTarget;
     element.classList.add(this.activeClass);
     outsideClick(element, this.events, () => {

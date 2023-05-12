@@ -18,7 +18,11 @@
     border: 10px solid #FB5;
     box-shadow: 0 0 0 10px white; /*aqui é uma sombra mas deixamos como se fosse um quadro*/
     position: relative; /*pois quero mudar o x de lugar*/
-    min-width: 300px;
+    /* min-width: 300px; */
+    /*configuração abaixo é para ficar responsivo e caber nas telas mobile*/
+    max-width: 400px;
+    width: 80vw;
+    box-sizing: border-box; /*possibilita aplicar o padding*/
 }
 
 @keyframes modal{
@@ -48,10 +52,7 @@
     border: 4px solid white;
     box-shadow:0 4px 4px 0 rgba(0, 0, 0, .3) ; /*deslocamento no x, deslocamento no y, borrao, cor*/
     border-radius: 50%;
-    background: #E54;
-    font-size: 1.2rem;
-    color: white;
-    font-family: 'IBM Plex Mono', monospace;
+    background: #E54 url(../img/fechar.svg) no-repeat center center;
     cursor: pointer;
 }
 
@@ -68,6 +69,8 @@
     width: 100%;
     padding: 0.7rem 0 0.5rem 0 ;
     box-sizing: border-box;
+    border: black 2px solid;
+    border-radius: 0px;
 }
 
 .modal button[type="submit"]{
