@@ -49,10 +49,12 @@
     right: -30px;
     width: 50px;
     height: 50px;
+    font-size: 20px;
+    color: white;
     border: 4px solid white;
     box-shadow:0 4px 4px 0 rgba(0, 0, 0, .3) ; /*deslocamento no x, deslocamento no y, borrao, cor*/
     border-radius: 50%;
-    background: #E54 url(https://github.com/Victordop/animais-fantasticos-origamid/blob/master/projeto-final/img/fechar.svg) no-repeat center center;
+    background: #E54 url(../img/fechar.svg) no-repeat center center;
     cursor: pointer;
 }
 
